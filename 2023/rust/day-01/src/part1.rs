@@ -6,11 +6,9 @@ pub fn process(input: &str) -> String {
             let first = it.next().expect("number");
 
             match it.last() {
-                Some(num) => format!("{first}{num}"),
-                None => format!("{first}{first}"),
+                Some(num) => first * 10 + num,
+                None => first * 10 + first,
             }
-            .parse::<u32>()
-            .expect("a valid number")
         })
         .sum::<u32>();
 
