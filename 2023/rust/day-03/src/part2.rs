@@ -76,19 +76,24 @@ pub fn process(input: &str) -> u32 {
     let mut schematic = EngineSchematic::new();
     schematic.parse_schematic(input);
 
-    schematic
-        .part_numbers
-        .iter()
-        .filter(|num| {
-            schematic
-                .gears
-                .iter()
-                .filter(|gear| num.points.contains(gear))
-                .count()
-                == 2
-        })
-        .map(|num| num.value)
-        .sum::<u32>()
+    let mut total = 0;
+
+    'next_gear: for gear in &schematic.gears {
+        let mut matches = Vec::new();
+        for num in &schematic.part_numbers {
+            if num.points.contains(gear) {
+                if matches.len() == 2 {
+                    continue 'next_gear;
+                }
+                matches.push(num.value);
+            }
+        }
+        if matches.len() == 2 {
+            total += matches[0] * matches[1];
+        }
+    }
+
+    total
 }
 
 #[cfg(test)]
@@ -107,6 +112,6 @@ mod tests {
 ......755.
 ...$.*....
 .664.598..";
-        assert_eq!(467835, process(input))
+        assert_eq!(467835, crate::part2::process(input))
     }
 }
