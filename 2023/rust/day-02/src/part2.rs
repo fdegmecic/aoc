@@ -7,6 +7,7 @@ use nom::{
     sequence::{preceded, separated_pair},
     IResult,
 };
+use nom::character::complete::digit1;
 
 #[derive(Debug)]
 struct Cube<'a> {
@@ -50,6 +51,7 @@ fn parse_rounds(input: &str) -> IResult<&str, Vec<Cube>> {
 }
 
 fn parse_game(input: &str) -> IResult<&str, Game> {
+    let (input, _) = preceded(tag("Game "), digit1)(input)?;
     let (input, rounds) = preceded(tag(": "), separated_list1(tag("; "), parse_rounds))(input)?;
     Ok((input, Game { rounds }))
 }
