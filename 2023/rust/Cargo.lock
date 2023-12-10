@@ -118,7 +118,15 @@ version = "0.1.0"
 dependencies = [
  "itertools",
  "nom",
- "nom-supreme",
+ "rstest",
+]
+
+[[package]]
+name = "day-09"
+version = "0.1.0"
+dependencies = [
+ "itertools",
+ "nom",
  "rstest",
 ]
 

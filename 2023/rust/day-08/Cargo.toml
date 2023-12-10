@@ -8,6 +8,5 @@ edition = "2021"
 [dependencies]
 itertools = { workspace = true }
 nom = { workspace = true }
-nom-supreme = "0.8.0"
 rstest = { workspace = true }
 
