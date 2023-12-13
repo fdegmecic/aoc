@@ -103,6 +103,6 @@ mod tests {
 22C = (22Z, 22Z)
 22Z = (22B, 22B)
 XXX = (XXX, XXX)";
-        assert_eq!(2, process(input));
+        assert_eq!(6, process(input));
     }
 }
