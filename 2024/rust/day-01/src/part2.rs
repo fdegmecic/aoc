@@ -1,3 +1,5 @@
+use itertools::Itertools;
+
 #[tracing::instrument]
 pub fn process(input: &str) -> miette::Result<String> {
     let (first, second): (Vec<usize>, Vec<usize>) = input
@@ -11,10 +13,10 @@ pub fn process(input: &str) -> miette::Result<String> {
         })
         .unzip();
 
-    let res: usize = first
+    let frequencies = second.iter().counts();
+    let res = first
         .iter()
-        .map(|num| num * second.iter().filter(|r| &num == r).count())
-        .sum();
+        .fold(0, |acc, num| acc + num * frequencies.get(num).unwrap_or(&0));
 
     Ok(res.to_string())
 }

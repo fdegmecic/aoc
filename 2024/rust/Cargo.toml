@@ -5,6 +5,7 @@ members = ["day-*"]
 default-members = ["day-*"]
 
 [workspace.dependencies]
+itertools = "0.13.0"
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.18", features = ["fmt", "env-filter"] }
 rstest = "0.23.0"
